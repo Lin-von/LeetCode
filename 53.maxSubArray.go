@@ -1,7 +1,7 @@
 package main
 
 
-
+// 取 当前最大和+当前值与当前值中的较大值 维护即可
 func maxSubArray(nums []int) int {
 	n := len(nums)
 	if (n == 0) {
