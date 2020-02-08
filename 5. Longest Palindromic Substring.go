@@ -6,25 +6,24 @@ func longestPalindrome(s string) string {
 	if n == 0 {
 		return s
 	}
-	dp := [1000][1000]int{}
+	dp := make([]int, n)
 	ret := s[0:1]
-	for i := 0; i < n; i++ {
-		dp[i][i] = 1
-	}
 
-	for i := n - 2; i >= 0; i-- {
-		for j := i + 1; j < n ; j++ {
 
-			if s[i] == s[j] && ( (i + 1 > j - 1) || dp[i + 1][j - 1] == 1 ) {
-				dp[i][j] = 1
+	// 优化DP空间，二维DP表示的是i起始j结束是否为回文，实际dp[i][j]只用到dp[i+1][j-1]。
+	// 因此优化为一维，DP[j]表示第i+1行状态，即一维DP随着运行时行数变化在不断更新，因此为了防止未使用的数据被覆盖，采用倒序遍历j
+	for i := n - 1; i >= 0; i-- {
+		for j:= n - 1; j >= i; j-- {
+			if s[i] == s[j] && ( (i + 1 >= j - 1) || dp[j - 1] == 1 ) {
+				dp[j] = 1
 				if j - i + 1 > len(ret) {
 					ret = s[i:j + 1]
 				}
 			} else {
-				dp[i][j] = 0
+				dp[j] = 0
 			}
-
 		}
 	}
+
 	return ret
 }
