@@ -1,5 +1,6 @@
 package main
 
+// 维护左区和右区的边界，从中间遍历做交换
 func sortColors(nums []int)  {
 	p := 0
 	q := len(nums) - 1

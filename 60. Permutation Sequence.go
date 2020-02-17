@@ -2,6 +2,8 @@ package main
 
 import "strconv"
 
+// 数论，找第K个排列
+// 从左至右，k / (x)! 可以获得当前n-x位置取第几小的数,之后k对x!取模，进入下一个循环
 func getPermutation(n int, k int) string {
 	k --
 	tmp := 1

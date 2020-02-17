@@ -8,6 +8,8 @@ func Min(i, j int) int {
 	}
 }
 
+// DP[i][j]表示字符串1的i和2的j之间的编辑距离
+// 相同时无需操作，不相同时的操作删、加、改可以分别转换为三个前置状态
 func minDistance(word1 string, word2 string) int {
 	m := len(word1)
 	n := len(word2)
