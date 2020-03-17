@@ -12,6 +12,7 @@ func dfs(s string, m map[string]map[string]float64, tar string, walk map[string]
 		}
 	}
 }
+
 func calcEquation(equations [][]string, values []float64, queries [][]string) []float64 {
 	m := map[string]map[string]float64{}
 	for i := 0; i < len(values); i++ {
