@@ -1,7 +1,5 @@
 package main
 
-package main
-
 type MinStack struct {
 	stack []int
 	minV []int
