@@ -19,9 +19,5 @@ func validateStackSequences(pushed []int, popped []int) bool {
 			p2 ++
 		}
 	}
-	if p2 == l2 {
-		return true
-	} else {
-		return false
-	}
+	return true
 }
