@@ -23,28 +23,19 @@ public:
 */
 class Solution {
 public:
+    Node* pre;
     void scanTree(Node* root) {
-        if (root->left != NULL) {
-            Node* tmp = root->left;
-            while (tmp->right != NULL) {
-                tmp = tmp->right;
-            }
-
-            scanTree(root->left);
-            tmp->right = root;
-            root->left = tmp;
+        if (!root) {
+            return;
         }
 
-        if (root->right != NULL) {
-            Node* tmp = root->right;
-            while (tmp->left != NULL) {
-                tmp = tmp->left;
-            }
-
-            scanTree(root->right);
-            tmp->left = root;
-            root->right = tmp;
+        scanTree(root->left);
+        if (pre) {
+            pre->right = root;
+            root->left = pre;
         }
+        pre = root;
+        scanTree(root->right);
     }
 
     Node* treeToDoublyList(Node* root) {
@@ -52,16 +43,14 @@ public:
             return root;
         }
         Node* l = root;
-        Node* r = root;
         while (l->left != NULL) {
             l = l->left;
         }
-        while (r->right != NULL) {
-            r = r->right;
-        }
+        pre = NULL;
+
         scanTree(root);
-        l->left = r;
-        r->right = l;
+        l->left = pre;
+        pre->right = l;
         return l;
     }
 };
