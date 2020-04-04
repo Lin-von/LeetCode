@@ -1,25 +1,22 @@
 package main
 
-import "strconv"
-
-type NTrie struct {
-	isNum bool
-	Next [10]*RTrie
-}
-
-func dfs(cur, ret string, num int)  {
-
-}
+import (
+	"sort"
+	"strconv"
+)
 
 func minNumber(nums []int) string {
-	t := NTrie{}
+	sort.Slice(nums, func(i, j int) bool {
+		s1 := strconv.Itoa(nums[i])
+		s2 := strconv.Itoa(nums[j])
+		return s1 + s2 < s2 + s1
+	})
+	ret := ""
 	for _, num := range nums {
-		s := strconv.Itoa(num)
-		tmp := t
-		for i := 0; i < len(s); i++ {
-			if tmp.Next[s[i] - '0'] == nil {
-
-			}
-		}
+		ret += strconv.Itoa(num)
 	}
+
+	return ret
 }
+
+
