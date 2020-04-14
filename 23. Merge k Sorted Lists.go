@@ -2,14 +2,14 @@ package main
 
 import "container/heap"
 
-type Heap []int
+type Heap []*ListNode
 
 func (h Heap) Len() int {
 	return len(h)
 }
 
 func (h Heap) Less(i, j int) bool {
-	return h[i] < h[j]
+	return h[i].Val < h[j].Val
 }
 
 func (h Heap) Swap(i, j int) {
@@ -17,7 +17,7 @@ func (h Heap) Swap(i, j int) {
 }
 
 func (h *Heap) Push(x interface{})  {
-	*h = append(*h, x.(int))
+	*h = append(*h, x.(*ListNode))
 }
 
 func (h *Heap) Pop() interface{} {
@@ -36,17 +36,21 @@ func mergeKLists(lists []*ListNode) *ListNode {
 	head := ListNode{}
 	p := &head
 	for _, list := range lists {
-		for list != nil {
-			heap.Push(&h, list.Val)
-			list = list.Next
+		if list != nil {
+			heap.Push(&h, list)
 		}
 	}
 
 	for h.Len() != 0 {
 		tmp := ListNode{}
-		tmp.Val = heap.Pop(&h).(int)
+		cur := heap.Pop(&h).(*ListNode)
+		tmp.Val = cur.Val
 		p.Next = &tmp
 		p = p.Next
+		cur = cur.Next
+		if cur != nil {
+			heap.Push(&h, cur)
+		}
 	}
 
 	return head.Next
