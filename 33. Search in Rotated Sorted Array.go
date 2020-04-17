@@ -9,7 +9,7 @@ func search(nums []int, target int) int {
 			return x
 		} else {
 
-			if nums[l] < nums[x] {
+			if nums[l] <= nums[x] {
 				if target >= nums[l] && target < nums[x] {
 					r = x - 1
 				} else {
