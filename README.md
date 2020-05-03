@@ -1,2 +1,2 @@
 # LeetCode
-code storage
+LeetCode Everyday
