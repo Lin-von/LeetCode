@@ -1,30 +1,18 @@
 package main
 
-func isValidBST(root *TreeNode) bool {
+import "math"
+
+func helper(root *TreeNode, max, min int) bool {
 	if root == nil {
 		return true
 	}
 
-	l := root.Left
-	r := root.Right
-
-	if l != nil {
-		for l.Right != nil {
-			l = l.Right
-		}
-		if l.Val >= root.Val {
-			return false
-		}
+	if root.Val >= max || root.Val <= min {
+		return false
 	}
 
-	if r != nil {
-		for r.Left != nil {
-			r = r.Left
-		}
-		if r.Val <= root.Val {
-			return false
-		}
-	}
-
-	return isValidBST(root.Left) && isValidBST(root.Right)
+	return helper(root.Left, root.Val, min) && helper(root.Right, max, root.Val)
+}
+func isValidBST(root *TreeNode) bool {
+	return helper(root, math.MaxInt64, math.MinInt64)
 }
